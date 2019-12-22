@@ -7,7 +7,7 @@
 
 
 <%
-	List<GuestbookVo> list = new GuestbookDao().findAll();
+	List<GuestbookVo> list = (List<GuestbookVo>)request.getAttribute("list");
 %>
 
 <html>
@@ -35,14 +35,15 @@
 	<br>
 
 	<%
-		int totalCount = list.size();
-		int index = 0;
-		for (GuestbookVo vo : list) {
+		if(list != null){
+			for(GuestbookVo vo: list){ 
+				
+				//totalCount - index++
 	%>
 
 	<table width=510 border=1>
 		<tr>
-			<td>[<%=totalCount - index++%>]
+			<td>[<%=vo.getNo()%>]
 			</td>
 			<td><%=vo.getName()%></td>
 			<td><%=vo.getRegDate()%></td>
@@ -54,9 +55,8 @@
 	</table>
 	<br>
 
-	<%
-		}
-	%>
+	<%	} %>
+	<% } %>
 
 </body>
 </html>
